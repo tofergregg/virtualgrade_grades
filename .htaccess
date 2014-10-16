@@ -1,0 +1,7 @@
+AuthName "Virtual Grade"
+AuthType Basic
+AuthBasicProvider ldap
+AuthLDAPURL "ldaps://ldap.eecs.tufts.edu/ou=people,dc=eecs,dc=tufts,dc=edu?uid"
+AuthGroupFile /h/cgregg/public_html/grades/ht/.htgroup.dbase
+AuthzGroupFileAuthoritative on
+Require group students

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>Virtual Grade Report</title>
+</head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<script type="text/javascript">
+function init(){
+        // save token for this student (so no other students can access this student's grades)
+}
+function login(){
+    $.post("cgi-bin/remoteUser.cgi", {}, 
+                function (data){
+                    console.log(data);
+                    login.remoteUser = data['remoteUser'];
+                        $("#remoteUserData").val(login.remoteUser);
+		        $("#loadPage").submit();
+            });
+    //var url = 'https://accounts.google.com/o/oauth2/auth?scope=profile&client_id=530177174781-jbceho0sc7huam39s44htgpigt9f068v.apps.googleusercontent.com&redirect_uri=http://209-6-230-17.c3-0.smr-ubr2.sbo-smr.ma.cable.rcn.com:8000/web/cgi-bin/google_login.py&response_type=code&approval_prompt=auto'
+    //var url = 'https://accounts.google.com/o/oauth2/auth?scope=profile&client_id=530177174781-j008dlneh343lle45vv6d1geen60eogd.apps.googleusercontent.com&redirect_uri=http://localhost/oauth2callback&response_type=code&approval_prompt=auto'
+
+}
+</script>
+
+<body onload="init()">
+        <form style="display: hidden;" action="cgi-bin/loadPage.cgi" method="POST" id="loadPage">
+		<input type="hidden" id="pageToLoad" name="page" value="startGradeReport"/>
+		<input type="hidden" id="remoteUserData" name="remoteUser" value=""/>
+        </form>
+    <input type="button" value="Log in to Virtual Grade Reports" id="submit" onclick="login()">
+</body>
+</html>
