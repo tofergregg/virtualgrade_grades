@@ -11,6 +11,7 @@ import json
 
 cgitb.enable()
 dataDir = "../data/"
+gradesDir = dataDir+"allGrades/"
 classesDir = "classes/"
 userLockfilesDir = "metadata/lockfiles/"
 logDir = "log/"
@@ -34,16 +35,16 @@ try:
 except KeyError:
     remoteUser = sys.argv[1]
         
-# load grades from allGrades.txt file
+# search all grade files for student
 
-with open(dataDir+"allGrades.txt","r") as f:
-        assignmentDataList = json.loads(f.read())
-
+dirList = os.listdir(gradesDir)
 studentData = []
-for assignment in assignmentDataList:
-        if assignment['student'] == remoteUser:
-               studentData.append(assignment)
-               
+for file in dirList:
+	with open(gradesDir+file,"r") as f:
+        	assignmentDataList = json.loads(f.read())
+ 	for assignment in assignmentDataList:
+		if assignment['student'] == remoteUser:
+		       studentData.append(assignment)           
 # update log file
 now = time.strftime("%c")
 with open(dataDir+logDir+'virtualgrade.log','a') as f:
